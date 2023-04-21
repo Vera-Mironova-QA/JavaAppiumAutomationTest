@@ -119,6 +119,27 @@ public class FirstTest {
         );
     }
 
+    @Test
+    public void testCheckTextInSearch() {
+        assertElementHasText(
+                By.xpath("//*[@text='Search Wikipedia']"),
+                "Search Wikipedia",
+                "Text in search line other"
+        );
+    }
+
+    private WebElement assertElementHasText(By by, String expected, String errorMessage) {
+        WebElement textElement = waitForElementPresent(by, errorMessage);
+        String titleText = textElement.getAttribute("text");
+        Assert.assertEquals(
+                errorMessage,
+                expected,
+                titleText
+
+        );
+        return textElement;
+    }
+
     private WebElement waitForElementPresent(By by, String errorMessage, long timeoutInSeconds) {
         WebDriverWait wait = new WebDriverWait(driver, timeoutInSeconds);
         wait.withMessage(errorMessage + "\n");
