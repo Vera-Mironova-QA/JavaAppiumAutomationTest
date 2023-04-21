@@ -128,6 +128,36 @@ public class FirstTest {
         );
     }
 
+    @Test
+    public void testCheckListCards() {
+        waitForElementAndClick(
+                By.id("org.wikipedia:id/search_container"),
+                "Cannot find Search line on Main screen",
+                5
+        );
+        waitForElementAndSendKey(
+                By.xpath("//*[@text='Search…']"),
+                "Java",
+                "Cannot find input search",
+                5
+        );
+        assertElementHasText(
+                By.id("org.wikipedia:id/page_list_item_title"),
+                "Java",
+                "Text doesn't contain 'Java'"
+        );
+        waitForElementAndClear(
+                By.id("org.wikipedia:id/search_src_text"),
+                "Cannot find search field",
+                5
+        );
+        waitForElementNotPresent(
+                By.id("org.wikipedia:id/page_list_item_title"),
+                "Seach result not empty",
+                15
+        );
+    }
+
     private WebElement assertElementHasText(By by, String expected, String errorMessage) {
         WebElement textElement = waitForElementPresent(by, errorMessage);
         String titleText = textElement.getAttribute("text");
