@@ -538,6 +538,32 @@ public class FirstTest {
         );
     }
 
+    @Test
+    public void testCheckTitleOfArticle() {
+        waitForElementAndClick(
+                By.xpath("//*[@text='Search Wikipedia']"),
+                "Cannot find Search line on Main screen",
+                5
+        );
+        String searchInput = "Java";
+        waitForElementAndSendKey(
+                By.xpath("//*[@text='Search…']"),
+                searchInput,
+                "Cannot find input search",
+                5
+        );
+        String firstArticle = "Java (programming language)";
+        waitForElementAndClick(
+                By.xpath("//*[@resource-id='org.wikipedia:id/page_list_item_container']//*[@text='"+ firstArticle +"']"),
+                "Cannot find" + firstArticle + " after input " + searchInput + " in Search line",
+                5
+        );
+        assertElementPresent(
+                By.id("org.wikipedia:id/view_page_title_text"),
+                "Article does not have title"
+        );
+    }
+
     private WebElement assertElementHasText(By by, String expected, String errorMessage) {
         WebElement textElement = waitForElementPresent(by, errorMessage);
         String titleText = textElement.getAttribute("text");
@@ -654,5 +680,13 @@ public class FirstTest {
     private String waitForElementAndGetAttribute(By by, String attribute, String errorMessage,long timeoutInSeconds) {
         WebElement element = waitForElementPresent(by, errorMessage, timeoutInSeconds);
         return element.getAttribute(attribute);
+    }
+
+    private void assertElementPresent(By by, String errorMessage) {
+        WebElement element = driver.findElement(by);
+        if (element.isDisplayed() == false) {
+            String defaultMessage = "An element '" +by.toString() +"' supposed presented on screen";
+            throw new AssertionError(defaultMessage + " " + errorMessage);
+        }
     }
 }
