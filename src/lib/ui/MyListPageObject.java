@@ -15,11 +15,9 @@ public class MyListPageObject extends MainPageObject{
     //TEMPLATES METHODS
     private static String getListByNameXpath(String titleOfList) {
         return LIST_BY_NAME_XPATH_TPL.replace("{LIST_NAME}", titleOfList);
-
     }
     private static String getArticleByNameXpath(String article_title) {
         return ARTICLE_BY_NAME_XPATH_TPL.replace("{ARTICLE_TITLE}", article_title);
-
     }
     //TEMPLATES METHODS
 
@@ -48,5 +46,4 @@ public class MyListPageObject extends MainPageObject{
         );
         this.waitForArticleToDisappearByTitle(article_title);
     }
-
 }

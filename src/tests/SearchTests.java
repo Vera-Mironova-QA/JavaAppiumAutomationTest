@@ -50,4 +50,16 @@ public class SearchTests extends CoreTestCase {
         SearchPageObject.assertThereIsNoResultOfSearch();
     }
 
+    @Test
+    public void testCancelResultOfSearch() {
+        SearchPageObject SearchPageObject = new SearchPageObject(driver);
+
+        SearchPageObject.initSearchInput();
+        String titleOfSearch = "Java";
+        SearchPageObject.typeSearchLine(titleOfSearch);
+        SearchPageObject.waitForSearchResult("Object-oriented programming language");
+        SearchPageObject.assertCheckResultOfTest(titleOfSearch);
+        SearchPageObject.clickCancelSearch();
+        SearchPageObject.assertThereIsNoResultOfSearch();
+    }
 }

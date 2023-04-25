@@ -70,4 +70,22 @@ public class ArticlePageObject extends MainPageObject{
                 5
         );
     }
+    public void addSecondArticleToMyList() {
+        this.waitForElementAndClick(
+                By.xpath(MORE_OPTIONS_BUTTON),
+                "Cannot find More options button on screen",
+                5
+        );
+        this.waitForElementAndClick(
+                By.xpath(OPTION_ADD_TO_MY_LIST_BUTTON),
+                "Cannot find Add to reading list in menu",
+                5
+        );
+    }
+    public void assertCheckTitleOfArticle() {
+        assertElementPresent(
+                By.id(TITLE_ID),
+                "Article does not have title"
+        );
+    }
 }
