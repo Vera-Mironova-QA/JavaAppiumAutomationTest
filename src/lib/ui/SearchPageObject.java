@@ -10,6 +10,7 @@ public class SearchPageObject extends MainPageObject {
             SEARCH_INPUT = "//*[@text='Search…']",
             SEARCH_CANCEL_BUTTON = "org.wikipedia:id/search_close_btn",
             SEARCH_RESULT_BY_SUBSTRING_TPL = "//*[@resource-id='org.wikipedia:id/page_list_item_container']//*[@text='{SUBSTRING}']",
+            SEARCH_RESULT_BY_TITLE_AND_SUBSTRING_TPL = "//*[@resource-id='org.wikipedia:id/page_list_item_container']//*[@text='{TITLE}']/following-sibling::*[@text='{SUBSTRING}']",
             SEARCH_RESULT_ELEMENT = "//*[@resource-id='org.wikipedia:id/search_results_list']/*[@resource-id='org.wikipedia:id/page_list_item_container']",
             SEARCH_RESULT_IS_EMPTY_LABEL = "//*[@text='No results found']",
             SEARCH_RESULT_TITLE_ELEMENT = "org.wikipedia:id/page_list_item_title";
@@ -22,6 +23,9 @@ public class SearchPageObject extends MainPageObject {
     //TEMPLATES METHODS
     private static String getResultSearchElement(String substring){
         return SEARCH_RESULT_BY_SUBSTRING_TPL.replace("{SUBSTRING}", substring);
+    }
+    private static String getResultSearchElementByTitleAndSustring(String title, String substring){
+        return SEARCH_RESULT_BY_TITLE_AND_SUBSTRING_TPL.replace("{TITLE}", title).replace("{SUBSTRING}", substring);
     }
     //TEMPLATES METHODS
 
@@ -63,6 +67,14 @@ public class SearchPageObject extends MainPageObject {
                 By.xpath(SEARCH_RESULT_IS_EMPTY_LABEL),
                 "Cannot find empty result by request ",
                 15
+        );
+    }
+    public void waitForElementByTitleAndDescription(String title, String substring) {
+        String search_result_by_xpath = getResultSearchElementByTitleAndSustring(title, substring);
+        this.waitForElementPresent(
+                By.xpath(search_result_by_xpath),
+                "Cannot find article at search result with title " + title + " and substring " + substring,
+                5
         );
     }
     public void assertThereIsNoResultOfSearch() {
