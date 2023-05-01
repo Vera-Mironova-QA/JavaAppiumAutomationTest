@@ -22,7 +22,7 @@ public class iOSTestCase extends TestCase {
         capabilities.setCapability("platformName","iOS");
         capabilities.setCapability("deviceName","iPhone 12");
         capabilities.setCapability("platformVersion","15.4");
-        capabilities.setCapability("app","/Users/vera/Desktop/JavaAppiumAutomationTest/apks/Wikipedia.app");
+        capabilities.setCapability("app","/Users/vera/Desktop/JavaAppiumAutomationTest/apks/Wikipedia693.app");
 
         driver = new IOSDriver(new URL(AppiumURL),capabilities);
         this.rotateScreenPortrait();

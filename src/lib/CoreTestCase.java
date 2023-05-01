@@ -58,7 +58,7 @@ public class CoreTestCase extends TestCase {
             capabilities.setCapability("platformName","iOS");
             capabilities.setCapability("deviceName","iPhone 12");
             capabilities.setCapability("platformVersion","15.4");
-            capabilities.setCapability("app","/Users/vera/Desktop/JavaAppiumAutomationTest/apks/Wikipedia.app");
+            capabilities.setCapability("app","/Users/vera/Desktop/JavaAppiumAutomationTest/apks/Wikipedia693.app");
         } else {
             throw new Exception("Cannot get run platform from env variable. Platform valur " + platform);
         }

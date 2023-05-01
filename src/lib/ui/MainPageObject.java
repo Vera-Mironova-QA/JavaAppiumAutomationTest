@@ -160,7 +160,7 @@ public class MainPageObject {
 
         if (by_type.equals("xpath")) {
             return By.xpath(locator);
-        } else if (by_type.equals("is")) {
+        } else if (by_type.equals("id")) {
             return By.id(locator);
         } else {
             throw new IllegalArgumentException("Cannot get type of locator. Locator: " + locator_with_type);
