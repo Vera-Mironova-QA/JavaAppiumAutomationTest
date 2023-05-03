@@ -7,6 +7,7 @@ import org.openqa.selenium.WebElement;
 abstract  public class ArticlePageObject extends MainPageObject{
     protected static  String
             TITLE_ID,
+            TITLE_ID_SECOND,
             FOOTER_ELEMENT,
             MORE_OPTIONS_BUTTON,
             OPTION_ADD_TO_MY_LIST_BUTTON,
@@ -23,8 +24,19 @@ abstract  public class ArticlePageObject extends MainPageObject{
     public WebElement waitForTitleElement() {
         return this.waitForElementPresent(TITLE_ID,"Cannot find article title",5);
     }
+    public WebElement waitForTitleElementSecond() {
+        return this.waitForElementPresent(TITLE_ID_SECOND,"Cannot find article title",5);
+    }
     public String getArticleTitle() {
         WebElement title_element = waitForTitleElement();
+        if(Platform.getInstance().isAndroid()) {
+            return title_element.getAttribute("text");
+        } else {
+            return title_element.getAttribute("name");
+        }
+    }
+    public String getArticleSecond() {
+        WebElement title_element = waitForTitleElementSecond();
         if(Platform.getInstance().isAndroid()) {
             return title_element.getAttribute("text");
         } else {

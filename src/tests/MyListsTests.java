@@ -61,27 +61,50 @@ public class MyListsTests extends CoreTestCase {
         ArticlePageObject ArticlePageObject = ArticlePageObjectFactory.get(driver);
         ArticlePageObject.waitForTitleElement();
         String article_title_first = ArticlePageObject.getArticleTitle();
-        ArticlePageObject.addArticleToMyList(name_of_folder);
+        if (Platform.getInstance().isAndroid()) {
+            ArticlePageObject.addArticleToMyList(name_of_folder);
+        } else {
+            ArticlePageObject.addArticleToMySaved();
+        }
         ArticlePageObject.closeArticle();
+        if (Platform.getInstance().isIOS()) {
+            SearchPageObject.clickCancelSearch();
+        }
 
         SearchPageObject.initSearchInput();
         SearchPageObject.typeSearchLine("Java");
         SearchPageObject.clickByArticleWithSubstring("High-level programming language");
 
-        ArticlePageObject.waitForTitleElement();
-        String article_title_second = ArticlePageObject.getArticleTitle();
-        ArticlePageObject.addSecondArticleToMyList();
+        if (Platform.getInstance().isAndroid()) {
+            ArticlePageObject.waitForTitleElement();
+        } else {
+            ArticlePageObject.waitForTitleElementSecond();
+        }
+        String article_title_second = ArticlePageObject.getArticleSecond();
+        if (Platform.getInstance().isAndroid()) {
+            ArticlePageObject.addSecondArticleToMyList();
+        } else {
+            ArticlePageObject.addArticleToMySaved();
+        }
 
         MyListPageObject MyListPageObject = MyListPageObjectFactory.get(driver);
-        MyListPageObject.openListByName(name_of_folder);
+        if (Platform.getInstance().isAndroid()) {
+            MyListPageObject.openListByName(name_of_folder);
+        }
         ArticlePageObject.closeArticle();
+        if (Platform.getInstance().isIOS()) {
+            SearchPageObject.clickCancelSearch();
+        }
 
         NavigationUI NavigationUI = NavigationUIFactory.get(driver);;
         NavigationUI.clickMyList();
 
-        MyListPageObject.openListByName(name_of_folder);
+        if (Platform.getInstance().isAndroid()) {
+            MyListPageObject.openListByName(name_of_folder);
+        } else {
+            MyListPageObject.closePopup();
+        }
         MyListPageObject.swipeArticleToDelete(article_title_first);
-        MyListPageObject.waitForArticleToDisappearByTitle(article_title_first);
         MyListPageObject.waitForArticleToAppearByTitle(article_title_second);
     }
 }

@@ -48,7 +48,7 @@ abstract public class MyListPageObject extends MainPageObject{
         if (Platform.getInstance().isIOS()) {
             this.clickElementToTheRightUpperCorner(title_of_article, "Cannot find saved article");
         }
-        //this.waitForArticleToDisappearByTitle(article_title);
+        this.waitForArticleToDisappearByTitle(article_title);
     }
     public void closePopup() {
         this.waitForElementAndClick(CLOSE_POPUP_BUTTON, "Cannot find close button on popup", 10);
