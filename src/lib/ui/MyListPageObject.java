@@ -1,12 +1,13 @@
 package lib.ui;
 
 import io.appium.java_client.AppiumDriver;
-import org.openqa.selenium.By;
+import lib.Platform;
 
-public class MyListPageObject extends MainPageObject{
-    private static final String
-            LIST_BY_NAME_XPATH_TPL = "xpath://*[@text='{LIST_NAME}']",
-            ARTICLE_BY_NAME_XPATH_TPL = "xpath://*[@text='{ARTICLE_TITLE}']";
+abstract public class MyListPageObject extends MainPageObject{
+    protected static String
+            LIST_BY_NAME_XPATH_TPL,
+            ARTICLE_BY_NAME_XPATH_TPL,
+            CLOSE_POPUP_BUTTON;
 
     public MyListPageObject(AppiumDriver driver) {
         super(driver);
@@ -44,6 +45,12 @@ public class MyListPageObject extends MainPageObject{
                 title_of_article,
                 "Cannot find saved article"
         );
-        this.waitForArticleToDisappearByTitle(article_title);
+        if (Platform.getInstance().isIOS()) {
+            this.clickElementToTheRightUpperCorner(title_of_article, "Cannot find saved article");
+        }
+        //this.waitForArticleToDisappearByTitle(article_title);
+    }
+    public void closePopup() {
+        this.waitForElementAndClick(CLOSE_POPUP_BUTTON, "Cannot find close button on popup", 10);
     }
 }

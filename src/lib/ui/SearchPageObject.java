@@ -3,17 +3,17 @@ package lib.ui;
 import io.appium.java_client.AppiumDriver;
 import org.openqa.selenium.By;
 
-public class SearchPageObject extends MainPageObject {
+abstract public class SearchPageObject extends MainPageObject {
 
-    public static final String
-            SEARCH_INIT_ELEMENT = "xpath://*[@text='Search Wikipedia']",
-            SEARCH_INPUT = "xpath://*[@text='Search…']",
-            SEARCH_CANCEL_BUTTON = "id:org.wikipedia:id/search_close_btn",
-            SEARCH_RESULT_BY_SUBSTRING_TPL = "xpath://*[@resource-id='org.wikipedia:id/page_list_item_container']//*[@text='{SUBSTRING}']",
-            SEARCH_RESULT_BY_TITLE_AND_SUBSTRING_TPL = "xpath://*[@resource-id='org.wikipedia:id/page_list_item_container']//*[@text='{TITLE}']/following-sibling::*[@text='{SUBSTRING}']",
-            SEARCH_RESULT_ELEMENT = "xpath://*[@resource-id='org.wikipedia:id/search_results_list']/*[@resource-id='org.wikipedia:id/page_list_item_container']",
-            SEARCH_RESULT_IS_EMPTY_LABEL = "xpath://*[@text='No results found']",
-            SEARCH_RESULT_TITLE_ELEMENT = "id:org.wikipedia:id/page_list_item_title";
+    protected static  String
+            SEARCH_INIT_ELEMENT,
+            SEARCH_INPUT,
+            SEARCH_CANCEL_BUTTON,
+            SEARCH_RESULT_BY_SUBSTRING_TPL,
+            SEARCH_RESULT_BY_TITLE_AND_SUBSTRING_TPL,
+            SEARCH_RESULT_ELEMENT,
+            SEARCH_RESULT_IS_EMPTY_LABEL,
+            SEARCH_RESULT_TITLE_ELEMENT;
 
 
     public SearchPageObject(AppiumDriver driver) {
@@ -44,7 +44,6 @@ public class SearchPageObject extends MainPageObject {
     }
     public void typeSearchLine(String searchLine) {
         this.waitForElementAndSendKey(SEARCH_INPUT, searchLine, "Cannot find and type i nto search input",5);
-        driver.hideKeyboard();
     }
     public void waitForSearchResult(String substring) {
         String search_result_xpath = getResultSearchElement(substring);
