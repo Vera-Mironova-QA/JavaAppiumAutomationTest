@@ -9,7 +9,6 @@ public class IOSSearchPageObject extends SearchPageObject {
         SEARCH_INPUT = "xpath://XCUIElementTypeSearchField[@value='Search Wikipedia']";
         SEARCH_CANCEL_BUTTON = "xpath://XCUIElementTypeButton[@name='Cancel']";
         SEARCH_RESULT_BY_SUBSTRING_TPL = "xpath://XCUIElementTypeStaticText[contains(@name,'{SUBSTRING}')]";
-        SEARCH_RESULT_BY_TITLE_AND_SUBSTRING_TPL = "//XCUIElementTypeStaticText[contains(@name,'{TITLE}')/following-sibling::*[contains(@name,'{SUBSTRING}')]";
         SEARCH_RESULT_ELEMENT = "xpath://XCUIElementTypeStaticText";
         SEARCH_RESULT_IS_EMPTY_LABEL = "xpath://XCUIElementTypeStaticText[@name='No results found']";
         SEARCH_RESULT_TITLE_ELEMENT = "id:Java (programming language)";
